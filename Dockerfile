@@ -1,3 +1,4 @@
+FROM quay.io/spivegin/brook:latest AS brook
 FROM quay.io/spivegin/gobetween:latest AS gobetween
 FROM quay.io/spivegin/tlmbasedebian
 MAINTAINER TRH <docker@trhhosting.com>
@@ -23,3 +24,7 @@ RUN mkdir /opt/bin && \
 COPY --from=gobetween /opt/bin/gobetween /opt/bin/gobetween
 RUN chmod +x /opt/bin/gobetween && \
     ln -s /opt/bin/gobetween /bin/gobetween
+    
+COPY --from=brook /opt/bin/brook /opt/bin/brook
+RUN chmod +x /opt/bin/brook && \
+    ln -s /opt/bin/brook /bin/brook
