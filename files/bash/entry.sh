@@ -12,4 +12,5 @@ then
 else
  brook wsserver --domain $domain  -p $password &
 fi
+
 gobetween  from-file -f json /root/gobetween.json
