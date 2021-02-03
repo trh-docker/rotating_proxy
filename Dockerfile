@@ -7,7 +7,7 @@ ENV DINIT=1.2.4 \
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.4/dumb-init_${DINIT}_amd64.deb /tmp/dumb-init.deb
 
 RUN apt-get update && apt upgrade -y &&\
-    apt-get install -y apt-transport-https gnupg2 curl proxychains && \
+    apt-get install -y apt-transport-https gnupg2 curl proxychains psmisc nano procps && \
     dpkg -i /tmp/dumb-init.deb &&\
     apt-get autoclean && apt-get autoremove &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/*    
@@ -24,7 +24,7 @@ RUN mkdir /opt/bin && \
 COPY --from=gobetween /opt/bin/gobetween /opt/bin/gobetween
 RUN chmod +x /opt/bin/gobetween && \
     ln -s /opt/bin/gobetween /bin/gobetween
-    
+
 COPY --from=brook /opt/bin/brook /opt/bin/brook
 RUN chmod +x /opt/bin/brook && \
     ln -s /opt/bin/brook /bin/brook
