@@ -1,0 +1,19 @@
+{
+    "api": {
+        "enabled": true,
+        "bind": "127.0.0.1:8009"
+    },
+    "servers": {
+        "brook":{
+            "bind":"localhost:3000",
+            "discovery": {
+                "kind": "static",
+                "static_list": [
+                    "127.0.0.1:8012 weight=3",
+                    "127.0.0.1:8011 weight=2",
+                    "127.0.0.1:8010 weight=1"
+                ]   
+            }
+        }
+    }
+}

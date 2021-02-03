@@ -1,0 +1,32 @@
+```
+Server
+tor &
+brook socks5tohttp -s 127.0.0.1:9050 -l 127.0.0.1:8010 &
+brook socks5tohttp -s 127.0.0.1:9050 -l 127.0.0.1:8011 &
+brook server -l 0.0.0.0:8080 -p [password] &
+gobetween  from-file -f json gobetween.json
+json_file:
+{
+    "api": {
+        "enabled": true,
+        "bind": "127.0.0.1:8009"
+    },
+    "servers": {
+        "brook":{
+            "bind":"localhost:3000",
+            "discovery": {
+                "kind": "static",
+                "static_list": [
+                    "127.0.0.1:8010 weight=1",
+                    "127.0.0.1:8011 weight=1"
+                ]   
+            }
+        }
+    }
+}
+
+Client
+export http_proxy=http://127.0.0.1:8010 
+export https_proxy=http://127.0.0.1:8010
+brook map -s [public_ipaddress]:[port] -p [password] -f 127.0.0.1:8010 -t 127.0.0.1:3000
+```

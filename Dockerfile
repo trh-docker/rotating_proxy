@@ -28,3 +28,12 @@ RUN chmod +x /opt/bin/gobetween && \
 COPY --from=brook /opt/bin/brook /opt/bin/brook
 RUN chmod +x /opt/bin/brook && \
     ln -s /opt/bin/brook /bin/brook
+
+WORKDIR /root/
+ADD files/gobetween/gobetween.json /root/gobetween.json
+ADD files/bash/entry.sh /root/entry.sh
+
+RUN chmod +x /root/entry.sh
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["/root/entry.sh"]
