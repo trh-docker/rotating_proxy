@@ -4,16 +4,70 @@
         "bind": "127.0.0.1:8009"
     },
     "servers": {
-        "brook":{
-            "bind":"localhost:3000",
-            "discovery": {
-                "kind": "static",
-                "static_list": [
-                    "127.0.0.1:8012 weight=3",
-                    "127.0.0.1:8011 weight=2",
-                    "127.0.0.1:8010 weight=1"
-                ]   
-            }
+      "proxies": {
+        "max_connections": 0,
+        "client_idle_timeout": "0",
+        "backend_idle_timeout": "0",
+        "backend_connection_timeout": "0",
+        "bind": "localhost:3001",
+        "protocol": "tcp",
+        "balance": "roundrobin",
+        "sni": null,
+        "tls": null,
+        "backends_tls": null,
+        "udp": null,
+        "access": null,
+        "proxy_protocol": null,
+        "discovery": {
+          "kind": "static",
+          "failpolicy": "setempty",
+          "interval": "0",
+          "timeout": "0",
+          "static_list": [
+            "localhost:8010"
+          ]
+        },
+        "healthcheck": {
+          "kind": "none",
+          "interval": "0",
+          "passes": 1,
+          "fails": 1,
+          "timeout": "0",
+          "initial_status": null
         }
+      },
+      "tor": {
+        "max_connections": 0,
+        "client_idle_timeout": "0",
+        "backend_idle_timeout": "0",
+        "backend_connection_timeout": "0",
+        "bind": "localhost:3000",
+        "protocol": "tcp",
+        "balance": "roundrobin",
+        "sni": null,
+        "tls": null,
+        "backends_tls": null,
+        "udp": null,
+        "access": null,
+        "proxy_protocol": null,
+        "discovery": {
+          "kind": "static",
+          "failpolicy": "setempty",
+          "interval": "0",
+          "timeout": "0",
+          "static_list": [
+              "localhost:8011", 
+              "localhost:8012"
+            ]
+        },
+        "healthcheck": {
+          "kind": "none",
+          "interval": "0",
+          "passes": 1,
+          "fails": 1,
+          "timeout": "0",
+          "initial_status": null
+        }
+      }
     }
 }
