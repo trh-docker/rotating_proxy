@@ -3,7 +3,7 @@ password=${PROXY_PASSWORD}
 domain=${PROXY_DOMAIN}
 
 tor &
-glider -conf /root/glider.conf
+glider -config /root/glider.conf
 # brook socks5tohttp -s 127.0.0.1:9050 -l 127.0.0.1:8010 &
 # brook socks5tohttp -s 127.0.0.1:9050 -l 127.0.0.1:8011 &
 # brook socks5tohttp -s 127.0.0.1:9050 -l 127.0.0.1:8012 &
