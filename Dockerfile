@@ -1,5 +1,7 @@
 FROM quay.io/spivegin/brook:latest AS brook
 FROM quay.io/spivegin/gobetween:latest AS gobetween
+FROM quay.io/spivegin/glider AS glider
+
 FROM quay.io/spivegin/tlmbasedebian
 MAINTAINER TRH <docker@trhhosting.com>
 ENV DINIT=1.2.4 \
@@ -31,10 +33,14 @@ COPY --from=brook /opt/bin/brook /opt/bin/brook
 RUN chmod +x /opt/bin/brook && \
     ln -s /opt/bin/brook /bin/brook
 
+COPY --from=glider /opt/glider /opt/bin/glider
+RUN chmod +x /opt/bin/glider && \
+    ln -s /opt/bin/glider /bin/glider
+
 WORKDIR /root/
 ADD files/gobetween/gobetween.json /root/gobetween.json
 ADD files/bash/entry.sh /root/entry.sh
-
+ADD files/glider/glider.conf /root/glider.conf
 RUN chmod +x /root/entry.sh
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]

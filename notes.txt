@@ -30,3 +30,5 @@ export http_proxy=http://127.0.0.1:8010
 export https_proxy=http://127.0.0.1:8010
 brook map -s [public_ipaddress]:[port] -p [password] -f 127.0.0.1:8010 -t 127.0.0.1:3000
 ```
+
+now defaults to glider and tor
