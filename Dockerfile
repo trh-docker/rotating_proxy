@@ -40,8 +40,10 @@ RUN chmod +x /opt/bin/glider && \
 WORKDIR /root/
 ADD files/gobetween/gobetween.json /root/gobetween.json
 ADD files/bash/entry.sh /root/entry.sh
-ADD files/glider/glider.conf /root/glider.conf
 RUN chmod +x /root/entry.sh
+ADD files/bash/entry_brook.sh /root/entry_brook.sh
+RUN chmod +x /root/entry_brook.sh
+ADD files/glider/glider.conf /root/glider.conf
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/root/entry.sh"]
